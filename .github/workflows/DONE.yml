@@ -2,9 +2,6 @@ name: CI
 
 env:
   PROJECT_NAME: app_calculator 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-
 
 on:
   push:
@@ -19,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: CheckCode
-      - uses: andymckay/pycodestyle-action@0.1.3
+        uses: andymckay/pycodestyle-action@0.1.3
     
            
      
