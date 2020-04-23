@@ -3,7 +3,7 @@
 name: CI
 
 env:
-  PROJECT_NAME: app_calculator 
+  PROJECT_NAME: сalculator 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
@@ -30,7 +30,7 @@ jobs:
     - name: Upload to DOCKERHUB  
       run: |
         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
-        docker push $PROJECT_NAME:v$GITHUB_RUN_NUMBER
+        docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
 
         
  
