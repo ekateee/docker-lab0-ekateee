@@ -3,7 +3,7 @@
 name: CI
 
 env:
-  PROJECT_NAME: сalculator 
+  PROJECT_NAME: "ekateee/сalculator" 
 
 on:
   push:
