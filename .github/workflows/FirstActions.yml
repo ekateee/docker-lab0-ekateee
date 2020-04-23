@@ -1,7 +1,7 @@
 name: CI
 
 env:
-  PROJECT_NAME: App_сalculator
+  PROJECT_NAME: app_сalculator
 
 on:
   push:
