@@ -18,14 +18,12 @@ jobs:
           args: pycodestyle -v 
             
 
-  CI:
+  build:
     needs: code-style
     runs-on: ubuntu-latest
-      
     steps:
     - uses: actions/checkout@v2
-
-  
+      
     - name: Docker build
       run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
       
@@ -33,3 +31,16 @@ jobs:
       run: |
         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
+        
+  test:
+    needs: build 
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker test
+      run: |
+        docker build -f docker/Dockerfile -t flask_app .
+        docker build -f docker/Dockerfile.tst -t flask_app_test .
+    - name: Docker run flask_app_test
+      run: docker run flask_app_test 
+          
