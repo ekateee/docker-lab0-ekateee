@@ -1,9 +1,9 @@
 name: CI
-# env:
-#   PROJECT_NAME: app_calculator 
+env:
+  PROJECT_NAME: app_calculator 
 on:
-#   push:
-#     branches: master 
+  push:
+    branches: master 
   pull_request:
     branches: master 
     
