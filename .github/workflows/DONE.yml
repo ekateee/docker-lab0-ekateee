@@ -17,17 +17,19 @@ jobs:
         with: 
           args: pycodestyle -v 
             
-  build:
-    needs: code-style   
-    runs-on: ubuntu-latest
-    steps: 
-      - uses: actions/checkout@v2
-      - uses: docker/build-push-checkout@v2
-      - name: Docker build
-        run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .      
-        
-      - name: Upload to DOCKERHUB    
-        run: |
-                docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
-                docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
 
+  CI:
+    needs: code-style
+    runs-on: ubuntu-latest
+      
+    steps:
+    - uses: actions/checkout@v2
+
+  
+    - name: Docker build
+      run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
+      
+    - name: Upload to DOCKERHUB    
+      run: |
+        docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
+        docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
