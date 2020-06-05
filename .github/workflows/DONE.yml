@@ -38,9 +38,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Docker test
-      run: docker build -f ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME/Dockerfile -t flask_app .
+      run: docker build -f /Dockerfile_test -t flask_app .
        
-    - name: Docker run flask_app_test
-      run: docker run flask_app_test 
+#     - name: Docker run flask_app_test
+#       run: docker run flask_app_test 
           
  #docker build -f docker/Dockerfile.tst -t flask_app_test .
