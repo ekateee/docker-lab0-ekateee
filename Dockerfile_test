@@ -1,10 +1,8 @@
-#FROM webserver:v4
 FROM python:3
-EXPOSE 5000
 COPY /tests /app/tests
 #COPY /README.rst /app/README.rst
-RUN python3 -m venv venv
-RUN . venv/bin/activate
+#RUN python3 -m venv venv
+#RUN . venv/bin/activate
 RUN pip install -e
 RUN pip install '.[test]' 
 CMD coverage run -m pytest
