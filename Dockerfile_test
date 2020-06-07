@@ -3,8 +3,7 @@ FROM python:3
 COPY /tests /app/tests
 RUN python3 -m venv venv
 RUN . venv/bin/activate
-#RUN pip install -e .
-RUN pip install '.[test]' 
+RUN pip install -e '.[test]'
 CMD coverage run -m pytest
 #RUN coverage run -m pytest
 #ENTRYPOINT coverage html
