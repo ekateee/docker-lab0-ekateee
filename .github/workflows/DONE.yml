@@ -1,6 +1,6 @@
 name: CI
 env:
-  PROJECT_NAME: app_calculator 
+  PROJECT_NAME: web_calculator 
 on:
   push:
     branches: master 
