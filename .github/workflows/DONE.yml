@@ -1,6 +1,6 @@
 name: CI
 env:
-  PROJECT_NAME: web_calculator 
+  PROJECT_NAME: app_calculator 
 on:
   push:
     branches: master 
@@ -39,15 +39,15 @@ jobs:
 #         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
 #         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
   CD:
-#     needs: [build]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2  
-    - name: docker image
-      run: docker images
     - name: kill old docker
-      run: docker kill ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
-#     - name: delete docker
+      run: docker kill $PROJECT_NAME
+      continue-on-error: true
+    - name: docker rm
+      run: run docker -d --rm --name $PROJECT_NAME -p 5000:5000 ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
       
       
  
