@@ -43,11 +43,11 @@ jobs:
       run: |
         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
-  CD:
+  Continuous Delivery:
     needs: [build, Upload to DockerHub]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2  
     - name: ps
-      run: docker -v
+      run: docker ps
 
