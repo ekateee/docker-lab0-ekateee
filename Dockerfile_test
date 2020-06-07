@@ -3,7 +3,7 @@ COPY /tests /app/tests
 #COPY /README.rst /app/README.rst
 #RUN python3 -m venv venv
 #RUN . venv/bin/activate
-RUN pip install -e
+RUN pip install -e .
 RUN pip install '.[test]' 
 CMD coverage run -m pytest
 #RUN coverage run -m pytest
