@@ -3,4 +3,6 @@ COPY /tests /app/tests
 #COPY /README.rst /app/README.rst
 #RUN . venv/bin/activate
 RUN pip install -e '.[test]'
-CMD coverage run -m pytest
+#CMD coverage run -m pytest
+RUN coverage run -m pytest
+ENTRYPOINT coverage html
