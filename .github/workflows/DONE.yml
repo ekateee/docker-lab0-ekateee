@@ -45,7 +45,6 @@ jobs:
     - uses: actions/checkout@v2  
     - name: ps
       run: |
-          docker ps
-          docker -v
-          echo 'docker'
+          docker images
+ 
 
