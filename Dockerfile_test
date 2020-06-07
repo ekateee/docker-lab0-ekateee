@@ -4,7 +4,8 @@ EXPOSE 5000
 COPY /tests /app/tests
 #COPY /README.rst /app/README.rst
 #RUN . venv/bin/activate
-RUN pip install -e '.[test]'
+RUN pip install -e
+RUN pip install '.[test]' 
 CMD coverage run -m pytest
 #RUN coverage run -m pytest
 #ENTRYPOINT coverage html
