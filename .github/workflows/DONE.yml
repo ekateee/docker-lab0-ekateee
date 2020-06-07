@@ -25,14 +25,14 @@ jobs:
 #       - name: Build docker test
 #         run: docker build -f Dockerfile_test -t buildbox-image . 
   
-#   build:
+  build:
 #     needs: [code-style, test]
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
       
-#     - name: Docker build
-#       run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
+    - name: Docker build
+      run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
       
 #     - name: Upload to DOCKERHUB    
 #       run: |
@@ -43,7 +43,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2  
+    - name: docker image
+      run: docker images
     - name: kill old docker
-      run: docker kill project 
+      run: docker kill ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
+    - name: delete docker
+      
+      
  
 
