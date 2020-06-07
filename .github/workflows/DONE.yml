@@ -39,8 +39,8 @@ jobs:
 #         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
 #         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
   CD:
-    needs: [build]
-    runs-on: ubuntu-latest
+    needs: build
+    runs-on: test_env
     steps:
     - uses: actions/checkout@v2  
     - name: kill old docker
