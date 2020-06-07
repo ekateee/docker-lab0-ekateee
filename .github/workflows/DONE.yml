@@ -8,43 +8,42 @@ on:
     branches: master 
     
 jobs:
-  code-style:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Code Style Checker
-        uses: andymckay/pycodestyle-action@0.1.3
-        with: 
-          args: pycodestyle -v 
+#   code-style:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Code Style Checker
+#         uses: andymckay/pycodestyle-action@0.1.3
+#         with: 
+#           args: pycodestyle -v 
  
-  test:
-    needs: code-style
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build docker test
-        run: docker build -f Dockerfile_test -t buildbox-image . 
+#   test:
+#     needs: code-style
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Build docker test
+#         run: docker build -f Dockerfile_test -t buildbox-image . 
   
-  build:
-    needs: [code-style, test]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
+#   build:
+#     needs: [code-style, test]
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
       
-    - name: Docker build
-      run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
+#     - name: Docker build
+#       run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
       
-    - name: Upload to DOCKERHUB    
-      run: |
-        docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
-        docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
+#     - name: Upload to DOCKERHUB    
+#       run: |
+#         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
+#         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
   CD:
-    needs: [build]
+#     needs: [build]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2  
-    - name: ps
-      run: |
-          docker images
+    - name: kill old docker
+      run: docker kill project 
  
 
