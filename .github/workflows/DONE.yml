@@ -37,6 +37,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Docker test
-        run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_test . --build-arg .     
+        run: sudo docker build -t $PROJECT_NAME -f Dockerfile_test . --build-arg .     
         
 
