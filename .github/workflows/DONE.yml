@@ -47,7 +47,7 @@ jobs:
       run: docker images
     - name: kill old docker
       run: docker kill ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
-    - name: delete docker
+#     - name: delete docker
       
       
  
