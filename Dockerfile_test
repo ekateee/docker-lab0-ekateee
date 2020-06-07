@@ -1,4 +1,6 @@
-FROM webserver:v4
+#FROM webserver:v4
+FROM python:3
+EXPOSE 5000
 COPY /tests /app/tests
 #COPY /README.rst /app/README.rst
 #RUN . venv/bin/activate
