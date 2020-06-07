@@ -17,12 +17,12 @@ jobs:
         with: 
           args: pycodestyle -v 
             
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Docker test container
-        run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_test . --build-arg .
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Docker test container
+#         run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_test . --build-arg .
  
     
   build:
