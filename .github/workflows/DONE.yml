@@ -82,12 +82,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build docker test
-        run: docker build -f Dockerfile_test -t buildbox-image . 
+        run: docker build -f Dockerfile_test -t $PROJECT_NAME . 
       - name: Run test
-        run: docker run buildbox-image
+        run: docker run $PROJECT_NAME
   
   build:
-    needs: [code-style, test]
+#     needs: [code-style, test]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
