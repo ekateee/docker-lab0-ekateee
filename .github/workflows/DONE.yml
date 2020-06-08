@@ -1,6 +1,6 @@
 name: CI
 env:
-  PROJECT_NAME: app_calculator 
+  PROJECT_NAME: docker-lab0-ekateee 
 on:
   push:
     branches: master 
@@ -33,13 +33,13 @@ jobs:
       
     - name: Docker build
       run: |
-        docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
+        docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME .
         docker images
       
 #     - name: Upload to DOCKERHUB    
 #       run: |
 #         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
-#         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
+#         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME
   CD:
     
     runs-on: test
@@ -51,7 +51,7 @@ jobs:
       continue-on-error: true
       
     - name: run project
-      run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000 ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
+      run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000 ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME
   
     - name: test http://192.168.99.100:5000
       run: curl -IS http://192.168.99.100:5000
