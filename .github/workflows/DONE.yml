@@ -40,14 +40,14 @@ jobs:
 #         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
   CD:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: test_env
     steps:
     - uses: actions/checkout@v2  
     - name: kill old docker
       run: docker kill $PROJECT_NAME
       continue-on-error: true
     - name: docker rm
-      run: docker run -p 8080:5000 ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
+      run: docker run -d -p 8080:5000 ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
       
       
  
