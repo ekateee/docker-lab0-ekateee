@@ -99,4 +99,18 @@ jobs:
 #         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
 #         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
 
- 
+  CD:
+    
+    runs-on: test
+    needs: build
+    steps:
+#     - uses: actions/checkout@v2  
+    - name: kill old docker
+      run: docker kill $PROJECT_NAME
+      continue-on-error: true
+      
+    - name: run project
+      run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000 $PROJECT_NAME
+  
+    - name: test http://192.168.99.100:5000
+      run: curl -IS http://192.168.99.100:5000
