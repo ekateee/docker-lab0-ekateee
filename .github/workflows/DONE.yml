@@ -82,9 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build docker test
-        run: docker build -f Dockerfile_test -t ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:test_ver$GITHUB_RUN_NUMBER . 
-      - name: Run test
-        run: docker run ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:test_ver$GITHUB_RUN_NUMBER
+        run: docker build -f Dockerfile_test -t buildbox-image .
   
   build:
 #     needs: [code-style, test]
