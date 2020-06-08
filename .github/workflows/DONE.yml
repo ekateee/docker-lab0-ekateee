@@ -40,7 +40,7 @@ jobs:
 #         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
   CD:
     needs: build
-    runs-on: test-env
+    runs-on: ubuntu-latets
     steps:
     - uses: actions/checkout@v2  
     - name: kill old docker
