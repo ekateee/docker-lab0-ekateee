@@ -83,6 +83,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build docker test
         run: docker build -f Dockerfile_test -t buildbox-image . 
+      - name: Run test
+        run: docker run buildbox-image
   
   build:
     needs: [code-style, test]
@@ -91,11 +93,12 @@ jobs:
     - uses: actions/checkout@v2
       
     - name: Docker build
-      run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
+#       run: docker build -t ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER .
+      run: docker build -t $PROJECT_NAME .
       
-    - name: Upload to DOCKERHUB    
-      run: |
-        docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
-        docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
+#     - name: Upload to DOCKERHUB    
+#       run: |
+#         docker login --username=${{ secrets.LOGIN_DOCKER }} --password=${{ secrets.PASSWORD_DOCKER }}
+#         docker push ${{ secrets.LOGIN_DOCKER }}/$PROJECT_NAME:v$GITHUB_RUN_NUMBER
 
  
