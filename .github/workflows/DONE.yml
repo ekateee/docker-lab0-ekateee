@@ -104,7 +104,6 @@ jobs:
     runs-on: test
     needs: build
     steps:
-#     - uses: actions/checkout@v2  
     - name: kill old docker
       run: docker kill $PROJECT_NAME
       continue-on-error: true
